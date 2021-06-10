@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Feedback from "../feedback/Feedback";
-import Section from "../section/Section";
 
 class Main extends Component {
  state = {
@@ -9,10 +8,10 @@ class Main extends Component {
   bad: 0,
  };
 
- newState = () => {
+ onLeaveFeedback = (scoreName) => {
   this.setState((prevState) => {
-   const { good } = prevState;
-   return { good: good + 1 };
+   const oldValue = prevState[scoreName];
+   return { [scoreName]: oldValue + 1 };
   });
  };
 
@@ -22,7 +21,7 @@ class Main extends Component {
   return total;
  };
 
-  countPositiveFeedbackPercentage = () => {
+ countPositiveFeedbackPercentage = () => {
   const { good } = this.state;
   const total = this.countTotalFeedback();
   const positiveFeedback = total ? Math.round((good / total) * 100) : 0;
@@ -31,14 +30,12 @@ class Main extends Component {
  render() {
   return (
    <main>
-    <Section title={"Section-Feedback"}>
-     <Feedback
-      state={this.state}
-      newState={this.newState}
-      countTotalFeedback={this.countTotalFeedback}
-      countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
-     />
-    </Section>
+    <Feedback
+     state={this.state}
+     onLeaveFeedback={this.onLeaveFeedback}
+     countTotalFeedback={this.countTotalFeedback}
+     countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
+    />
    </main>
   );
  }

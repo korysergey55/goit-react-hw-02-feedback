@@ -2,7 +2,6 @@ import React from "react";
 import Notification from "./notification/Notification";
 const Statistics = ({
  state,
- newState,
  countTotalFeedback,
  countPositiveFeedbackPercentage,
 }) => {

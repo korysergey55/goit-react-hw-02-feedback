@@ -1,12 +1,12 @@
 import React from 'react';
-const FeedbackOptions = ({ state, newState, countTotalFeedback }) => {
+const FeedbackOptions = ({ onLeaveFeedback }) => {
  return (
   <>
    <button
     type="button"
     className="btnGood"
     onClick={() => {
-     newState(state.good);
+     onLeaveFeedback('good');
     }}
    >
     Good
@@ -15,7 +15,7 @@ const FeedbackOptions = ({ state, newState, countTotalFeedback }) => {
     type="button"
     className="btnNeutral"
     onClick={() => {
-     newState(state.neutral);
+     onLeaveFeedback("neutral");
     }}
    >
     Neutral
@@ -24,7 +24,7 @@ const FeedbackOptions = ({ state, newState, countTotalFeedback }) => {
     type="button"
     className="btnBad"
     onClick={() => {
-     newState(state.bad);
+     onLeaveFeedback("bad");
     }}
    >
     Bad
