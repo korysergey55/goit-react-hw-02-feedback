@@ -1,33 +1,55 @@
-import React from 'react';
-import Section from './section/Section';
-import FeedbackOptions from './feedbackOptions/FeedbackOptions';
-import Statistics from './statistics/Statistics';
+import React, { Component } from "react";
+import Section from "./section/Section";
+import FeedbackOptions from "./feetbackOptoons/FeedbackOptions";
+import Statistics from "./statistics/Statistics";
 
-const Feedback = ({
- state,
- onLeaveFeedback,
- countTotalFeedback,
- countPositiveFeedbackPercentage,
-}) => {
- return (
-  <>
-   <h2 className="title">Please leave feedback</h2>
-   <Section title={"Section-Feedback"}>
-    <FeedbackOptions
-     onLeaveFeedback={onLeaveFeedback}
-     
-    />
-   </Section>
-   <Section title={"Section-Statistics"}>
-    <Statistics
-     state={state}
-     onLeaveFeedback={onLeaveFeedback}
-     countTotalFeedback={countTotalFeedback}
-     countPositiveFeedbackPercentage={countPositiveFeedbackPercentage}
-    />
-   </Section>
-  </>
- );
-};
+class Feedback extends Component {
+ state = {
+  good: 0,
+  neutral: 0,
+  bad: 0,
+ };
 
+ onLeaveFeedback = (scoreName) => {
+  this.setState((prevState) => {
+   const oldValue = prevState[scoreName];
+   return { [scoreName]: oldValue + 1 };
+  });
+ };
+
+ countTotalFeedback = () => {
+  const { good, neutral, bad } = this.state;
+  return good + neutral + bad;
+  
+ };
+
+ countPositiveFeedbackPercentage = () => {
+  const { good } = this.state;
+  const total = this.countTotalFeedback();
+  const positiveFeedback = Math.round((good / total) * 100);
+  return positiveFeedback;
+ };
+
+ render() {
+  return (
+   <>
+    <Section title={"Please leave feedback"}>
+     <FeedbackOptions
+      state={Object.keys(this.state)}
+      onLeaveFeedback={this.onLeaveFeedback}
+     />
+    </Section>
+
+    <Section title={"Statistics"}>
+     <Statistics
+      state={Object.entries(this.state)}
+      onLeaveFeedback={this.onLeaveFeedback}
+      countTotalFeedback={this.countTotalFeedback}
+      countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
+     />
+    </Section>
+   </>
+  );
+ }
+}
 export default Feedback;

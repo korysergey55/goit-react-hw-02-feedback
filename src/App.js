@@ -1,11 +1,9 @@
 import React from "react";
-import Main from "./components/main/Main";
+import Feedback from "./components/feedback/Feedback";
 const App = () => {
  return (
   <>
-   <Main>
-       
-   </Main>
+   <Feedback />
   </>
  );
 };
