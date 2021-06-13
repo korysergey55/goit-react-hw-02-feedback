@@ -1,6 +1,6 @@
 import React from "react";
 import { FeedbackContainer } from "./FeedbackOptionsStyled";
-import PropTypes, { arrayOf, object } from "prop-types";
+import PropTypes, { arrayOf, string } from "prop-types";
 
 const FeedbackOptions = ({ state, onLeaveFeedback }) => {
     
@@ -17,7 +17,7 @@ const FeedbackOptions = ({ state, onLeaveFeedback }) => {
 };
 
 FeedbackOptions.prototype = {
- state: arrayOf(PropTypes.arrayOf(object)).isRequired,
+ state: arrayOf(PropTypes.arrayOf(string)).isRequired,
  onLeaveFeedback: PropTypes.func.isRequired,
 };
 

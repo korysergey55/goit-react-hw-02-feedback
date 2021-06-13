@@ -12,8 +12,8 @@ class Feedback extends Component {
 
  onLeaveFeedback = (scoreName) => {
   this.setState((prevState) => {
-   const oldValue = prevState[scoreName];
-   return { [scoreName]: oldValue + 1 };
+   const oldStateValue = prevState[scoreName];
+   return { [scoreName]: oldStateValue + 1 };
   });
  };
 
@@ -43,7 +43,6 @@ class Feedback extends Component {
     <Section title={"Statistics"}>
      <Statistics
       state={Object.entries(this.state)}
-      onLeaveFeedback={this.onLeaveFeedback}
       countTotalFeedback={this.countTotalFeedback}
       countPositiveFeedbackPercentage={this.countPositiveFeedbackPercentage}
      />
